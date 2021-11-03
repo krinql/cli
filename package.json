@@ -1,0 +1,66 @@
+{
+  "name": "krinql-cli",
+  "version": "0.0.1",
+  "description": "A simple developer-friendly CLI for using Krinql",
+  "main": "./build/cli.js",
+  "bin": {
+    "krinql": "./build/cli.js",
+    "krinql-cli": "./build/cli.js"
+  },
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "files": [
+    "/assets",
+    "/build"
+  ],
+  "keywords": [
+    "cli",
+    "krinql",
+    "codex",
+    "AI"
+  ],
+  "author": "Krinql <support@krinql.com> (krinql.com)",
+  "homepage": "https://krinql.com",
+  "bugs": "https://github.com/krinql/cli/issues",
+  "scripts": {
+    "build": "tsc",
+    "package:linux": "pkg . --no-bytecode --targets node14-linux-x64 --output bin/linux/snip",
+    "package:macos": "pkg . --no-bytecode --targets node14-macos-x64 --output bin/macos/snip",
+    "format": "prettier --loglevel warn --write \"**/*.{ts,js,json,yaml}\"",
+    "format:check": "prettier --loglevel warn --check \"**/*.{ts,js,json,yaml}\"",
+    "lint": "eslint \"src/**/*.ts\" --fix",
+    "lint:check": "eslint \"src/**/*.ts\""
+  },
+  "dependencies": {
+    "axios": "^0.24.0",
+    "chalk": "4.1.1",
+    "figlet": "^1.5.2",
+    "ora": "5.4.1",
+    "yargs": "17.0.1"
+  },
+  "devDependencies": {
+    "@types/figlet": "^1.5.4",
+    "@types/node": "16.0.1",
+    "@types/yargs": "17.0.2",
+    "@typescript-eslint/eslint-plugin": "4.28.2",
+    "@typescript-eslint/parser": "4.28.2",
+    "eslint": "7.30.0",
+    "eslint-config-prettier": "8.3.0",
+    "pkg": "5.3.0",
+    "prettier": "2.3.2",
+    "ts-node": "10.0.0",
+    "typescript": "4.3.5"
+  },
+  "pkg": {
+    "scripts": "build/**/*.js"
+  },
+  "ava": {
+    "extensions": [
+      "ts"
+    ],
+    "require": [
+      "ts-node/register"
+    ]
+  }
+}
