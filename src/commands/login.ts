@@ -1,7 +1,6 @@
 import ora from 'ora';
 import open from 'open';
 import axios from 'axios';
-import cors from 'cors';
 import { AddressInfo } from 'net'
 import { createServer, IncomingMessage, ServerResponse } from 'http';
 import * as outputs from './login.outputs';
