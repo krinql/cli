@@ -3,11 +3,13 @@ import open from 'open';
 import axios from 'axios';
 import cors from 'cors';
 import { AddressInfo } from 'net'
-import express from 'express';
+import { createServer, IncomingMessage, ServerResponse } from 'http';
 import * as outputs from './login.outputs';
 import { Builder, Handler } from './login.types';
-import { ParsedQs } from 'qs';
-
+import { updateUserConfig, config } from '../services/config/userData';
+import { AUTH_BASE_PATH } from '../shared';
+import url from 'url';
+import { ParsedUrlQuery } from 'querystring';
 
 export const command = 'login';
 export const desc = 'Login with a new or existing account';
@@ -35,29 +37,37 @@ export const handler: Handler = async (argv) => {
 
 
   spinner.start('Logging in');
-  // await api.login
-  const app = express();
-  const corsOptions = {
-    origin: '*'
-  }
 
-  app.use(cors(corsOptions));
-
-  let resolve: { (arg0: string | ParsedQs | string[] | ParsedQs[] | undefined): void; (value: unknown): void; };
+  let resolve: { (arg0: ParsedUrlQuery): void; (value: unknown): void; };
   const p = new Promise((_resolve) => {
     resolve = _resolve;
   });
-  app.get('/auth', (req, res) => {
-    resolve(req.query);
-    console.log(`\nAccess token - ${req.query.token}\n refresh - ${req.query.refreshToken}`)
-    res.end('');
+
+  const server = createServer((req: IncomingMessage, res: ServerResponse) => {
+    // Set CORS headers
+    res.setHeader('Access-Control-Allow-Origin', '*'); // add domain in production
+    res.setHeader('Access-Control-Request-Method', '*');
+    res.setHeader('Access-Control-Allow-Methods', 'OPTIONS, GET');
+    res.setHeader('Access-Control-Allow-Headers', '*');
+
+    const url = new URL(req.url ?? '', `http://${req.headers.host}/`);
+
+    if (req.method === 'OPTIONS') {
+      res.writeHead(200);
+      res.end('');
+    } else if (url.pathname === '/auth' && req.method === 'GET') {
+      resolve(url.search);
+      updateUserConfig({ "accessToken": url.searchParams.get('accessToken')?.toString() ?? '', "refreshToken": url.searchParams.get('refreshToken')?.toString() ?? '', "name": url.searchParams.get('name')?.toString() ?? '' });
+      res.end('');
+    }
   });
 
-  const server = await app.listen(0);
+  server.listen(0);
   const { port } = server.address() as AddressInfo;
-
-  // open(`https://krinql.com/auth/external/cli/login?redirect_uri=http://localhost:${port}/auth`);
-  open(`http://localhost:3000/auth/external/cli/login?redirect_uri=http://localhost:${port}/auth`); // dev
+  if (process.env.NODE_ENV == 'production')
+    open(`${AUTH_BASE_PATH}?redirect_uri=http://localhost:${port}/auth`);
+  else
+    open(`http://localhost:3000/auth/external/cli/login?redirect_uri=http://localhost:${port}/auth`); // dev
 
   // Wait for token
   await p;
@@ -66,17 +76,13 @@ export const handler: Handler = async (argv) => {
 
   spinner.succeed();
 
-
   spinner.start('Fetching existing account configuration');
-
-
   spinner.succeed();
 
+  // display details 
+  outputs.showUserConfig();
+  outputs.deviceConfigured(config.path);
 
-  // const configPath = await writeUserConfig({
-  // });
-
-  // outputs.deviceConfigured(configPath);
   process.exit(0);
 
 };

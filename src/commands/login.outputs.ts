@@ -1,5 +1,6 @@
 import chalk from 'chalk';
 import figlet from 'figlet';
+import { config } from '../services/config/userData';
 
 export const welcome = (): void => {
   const welcomeAsciiText = figlet.textSync('Krinql')
@@ -20,12 +21,18 @@ The profile ${chalk.cyan(profile)} is already configured! 👌
 If you would like to login using a new profile, run the following:
 
     ${chalk.bold(
-      `$ krinql login --reauth`,
-    )}
+    `$ krinql login --reauth`,
+  )}
 
 `);
 
   process.exit(0);
+};
+
+export const showUserConfig = (): void => {
+  process.stdout.write(`
+  Logged In as ${chalk.green(config.get('name'))}
+  `);
 };
 
 export const deviceConfigured = async (configPath: string): Promise<never> => {
