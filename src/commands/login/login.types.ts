@@ -1,6 +1,6 @@
 import type { Arguments, CommandBuilder } from 'yargs';
 
-import type { BaseOptions } from '../shared';
+import type { BaseOptions } from '../../shared';
 
 export type Options = BaseOptions & {
   reauth: boolean | undefined;

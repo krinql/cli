@@ -1,6 +1,6 @@
 import chalk from 'chalk';
 import figlet from 'figlet';
-import { config } from '../services/config/userData';
+import { config } from '../../services/config/userData';
 
 export const welcome = (): void => {
   const welcomeAsciiText = figlet.textSync('Krinql')

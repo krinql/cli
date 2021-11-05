@@ -4,8 +4,8 @@ import { AddressInfo } from 'net';
 import { createServer, IncomingMessage, ServerResponse } from 'http';
 import * as outputs from './login.outputs';
 import { Builder, Handler } from './login.types';
-import { updateUserTokens, config } from '../services/config/userData';
-import { AUTH_BASE_PATH, IS_DEV } from '../shared';
+import { updateUserTokens, config } from '../../services/config/userData';
+import { AUTH_BASE_PATH, IS_DEV } from '../../shared';
 import { ParsedUrlQuery } from 'querystring';
 
 export const command = 'login';
@@ -38,12 +38,12 @@ export const handler: Handler = async (argv) => {
 
   const server = createServer((req: IncomingMessage, res: ServerResponse) => {
 
-    if(IS_DEV){
-    res.setHeader('Access-Control-Allow-Origin', '*'); 
-    res.setHeader('Access-Control-Request-Method', '*');
-    res.setHeader('Access-Control-Allow-Methods', 'OPTIONS, GET');
+    if (IS_DEV) {
+      res.setHeader('Access-Control-Allow-Origin', '*');
+      res.setHeader('Access-Control-Request-Method', '*');
+      res.setHeader('Access-Control-Allow-Methods', 'OPTIONS, GET');
     } else {
-      res.setHeader('Access-Control-Allow-Origin', 'https://krinql.com'); 
+      res.setHeader('Access-Control-Allow-Origin', 'https://krinql.com');
       res.setHeader('Access-Control-Request-Method', 'GET');
       res.setHeader('Access-Control-Allow-Methods', 'OPTIONS, GET');
     }

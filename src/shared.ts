@@ -3,7 +3,7 @@ export type BaseOptions = {
 };
 
 export const baseOptions = {
-  query: { type: 'string'},
+  query: { type: 'string' },
 } as const;
 
 export const API_BASE_PATH = 'https://krinql.com/api';

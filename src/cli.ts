@@ -2,7 +2,6 @@
 
 import yargs from 'yargs';
 import { hideBin } from 'yargs/helpers';
-
 import handleError from './handleError';
 
 yargs(hideBin(process.argv))
@@ -18,7 +17,7 @@ yargs(hideBin(process.argv))
     },
   )
   // Enable strict mode.
-  .strict()
+  // .strict()
   // Useful aliases.
   .alias({ h: 'help' })
   // Be nice.
