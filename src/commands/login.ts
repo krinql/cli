@@ -29,6 +29,11 @@ export const handler: Handler = async (argv) => {
 
   outputs.welcome();
 
+  if(!reauth) {
+    outputs.userConfigFound();
+    process.exit(0);
+  }
+
   spinner.start('Logging in');
 
   let resolve: { (arg0: ParsedUrlQuery): void; (value: unknown): void };

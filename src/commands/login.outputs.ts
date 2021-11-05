@@ -14,9 +14,9 @@ Access krinql features without leaving your terminal or IDE.
 `);
 };
 
-export const userConfigFound = (profile: string): Promise<never> => {
+export const userConfigFound = (): Promise<never> => {
   process.stdout.write(`
-The profile ${chalk.cyan(profile)} is already configured! 👌
+The profile ${chalk.cyan(config.get('userConfig.Profile.email'))} is already configured! 👌
 
 If you would like to login using a new profile, run the following:
 
