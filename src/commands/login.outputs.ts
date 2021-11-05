@@ -31,13 +31,13 @@ If you would like to login using a new profile, run the following:
 
 export const showUserConfig = (): void => {
   process.stdout.write(`
-  Logged In as ${chalk.green(config.get('name'))}
+  Logged In as ${chalk.green(config.get('userConfig.Profile.email'))}
   `);
 };
 
-export const deviceConfigured = async (configPath: string): Promise<never> => {
+export const deviceConfigured = async (_configPath: string): Promise<never> => {
   process.stdout.write(`
-✨ Configuration written to ${chalk.cyan(configPath)}.
+✨ Configuration written to disk.
 
 Let's try asking a question!
 
