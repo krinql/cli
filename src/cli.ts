@@ -2,8 +2,8 @@
 
 import yargs from 'yargs';
 import { hideBin } from 'yargs/helpers';
-
 import handleError from './handleError';
+import { askKrinqlhandler } from './utils/askKrinql/askKrinql';
 
 yargs(hideBin(process.argv))
   // Use the commands directory to scaffold.
@@ -12,13 +12,13 @@ yargs(hideBin(process.argv))
   .command(
     '$0',
     'The Krinql CLI usage',
-    () => undefined,
-    () => {
-      yargs.showHelp();
+    (yargs) => yargs.usage('$0 <question>').example([['$0 how to compile typescript code'], ['$0 how to implement decorators in python'], ['$0 how to softlink file in linux']]),
+    async (argv) => {
+      if (!argv._.slice(1).length)
+        return yargs.showHelp();
+      await askKrinqlhandler(argv);
     },
   )
-  // Enable strict mode.
-  .strict()
   // Useful aliases.
   .alias({ h: 'help' })
   // Be nice.

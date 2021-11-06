@@ -2,7 +2,7 @@ import chalk from 'chalk';
 import { EOL } from 'os';
 
 const printMessage = (message: string) => {
-  process.stderr.write(chalk.red(`Error: ${message}`) + EOL);
+  process.stderr.write(chalk.red(`\nError: ${message}`) + EOL);
   process.stderr.write(
     `Hint: Use the ${chalk.green(
       '--help',
@@ -17,17 +17,9 @@ export default async (message: string, error: Error): Promise<never> => {
   }
 
   let errorMessage = 'Unknown error occurred';
-
-  if (error instanceof Response) {
-    const { ErrorMessage } = await error.json();
-
-    if (ErrorMessage) {
-      errorMessage = ErrorMessage;
-    }
-  } else {
+  if(error.message) {
     errorMessage = error.message;
   }
-
   printMessage(errorMessage);
   process.exit(1);
 };
