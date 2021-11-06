@@ -12,7 +12,7 @@ yargs(hideBin(process.argv))
   .command(
     '$0',
     'The Krinql CLI usage',
-    (yargs) => yargs,
+    (yargs) => yargs.usage('$0 <question>').example([['$0 how to implement decorators in python'], ['$0 how to link file in linux']]),
     async (argv) => {
       if (!argv._.slice(1).length)
         return yargs.showHelp();
@@ -20,7 +20,7 @@ yargs(hideBin(process.argv))
     },
   )
   // Enable strict mode.
-  // .strict()
+  .strict()
   // Useful aliases.
   .alias({ h: 'help' })
   // Be nice.
