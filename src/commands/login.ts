@@ -29,7 +29,7 @@ export const handler: Handler = async (argv) => {
 
   outputs.welcome();
 
-  if(!reauth) {
+  if(!reauth && config.has('userConfig.Account')) {
     outputs.userConfigFound();
     process.exit(0);
   }
