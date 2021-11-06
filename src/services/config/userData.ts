@@ -10,3 +10,7 @@ export const updateUserTokens = (tokens: UserConfig['Account']): void => {
   config.set('userConfig.Account', tokens);
   config.set('userConfig.Profile.email', decodedToken.email);
 };
+
+export const clearUserTokens = (): void => {
+  config.delete('userConfig');
+};

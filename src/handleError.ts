@@ -17,17 +17,9 @@ export default async (message: string, error: Error): Promise<never> => {
   }
 
   let errorMessage = 'Unknown error occurred';
-
-  if (error instanceof Response) {
-    const { ErrorMessage } = await error.json();
-
-    if (ErrorMessage) {
-      errorMessage = ErrorMessage;
-    }
-  } else {
+  if(error.message) {
     errorMessage = error.message;
   }
-
   printMessage(errorMessage);
   process.exit(1);
 };

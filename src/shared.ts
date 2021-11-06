@@ -8,5 +8,6 @@ export const baseOptions = {
 
 export const API_BASE_PATH = 'https://krinql.com/api';
 export const AUTH_BASE_PATH = 'https://krinql.com/auth/external/cli/login';
+export const FIREBASE_API_KEY = "AIzaSyCDkSplsCexKg1Pn_4LtXqKiSNafXAs4zE";
 
 export const IS_DEV = false;
