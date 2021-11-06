@@ -2,11 +2,6 @@ export type BaseOptions = {
   query: string;
 };
 
-export const baseOptions = {
-  query: { type: 'string' },
-} as const;
-
-
 export const IS_DEV = false;
 
 export const API_BASE_PATH = IS_DEV?'http://localhost:3000/api':'https://krinql.com/api';

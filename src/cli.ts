@@ -3,6 +3,7 @@
 import yargs from 'yargs';
 import { hideBin } from 'yargs/helpers';
 import handleError from './handleError';
+import { askKrinqlhandler } from './utils/askKrinql/askKrinql';
 
 yargs(hideBin(process.argv))
   // Use the commands directory to scaffold.
@@ -11,9 +12,11 @@ yargs(hideBin(process.argv))
   .command(
     '$0',
     'The Krinql CLI usage',
-    () => undefined,
-    () => {
-      yargs.showHelp();
+    (yargs) => yargs,
+    async (argv) => {
+      if (!argv._.slice(1).length)
+        return yargs.showHelp();
+      await askKrinqlhandler(argv);
     },
   )
   // Enable strict mode.

@@ -1,15 +1,10 @@
 import ora from 'ora';
 import * as outputs from './askKrinql.outputs';
 import { api } from '../../services/api';
-import { Builder, Handler } from './askKrinql.types';
-import { parseSentence } from '../../utils/helpers';
-export const command = 'ask';
-export const desc = 'Let Krinql answer questions and doubts';
+import { Handler } from './askKrinql.types';
+import { parseSentence } from '../helpers';
 
-export const builder: Builder = (yargs) =>
-  yargs
-
-export const handler: Handler = async (argv) => {
+export const askKrinqlhandler: Handler = async (argv) => {
   const spinner = ora();
 
   // make sentence

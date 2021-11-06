@@ -4,8 +4,8 @@ import { AddressInfo } from 'net';
 import { createServer, IncomingMessage, ServerResponse } from 'http';
 import * as outputs from './login.outputs';
 import { Builder, Handler } from './login.types';
-import { updateUserTokens, config } from '../../services/config/userData';
-import { AUTH_BASE_PATH, IS_DEV } from '../../shared';
+import { updateUserTokens, config } from '../services/config/userData';
+import { AUTH_BASE_PATH, IS_DEV } from '../shared';
 import { ParsedUrlQuery } from 'querystring';
 
 export const command = 'login';
@@ -28,6 +28,11 @@ export const handler: Handler = async (argv) => {
   const { reauth } = argv;
 
   outputs.welcome();
+
+  if(!reauth && config.has('userConfig.Account')) {
+    outputs.userConfigFound();
+    process.exit(0);
+  }
 
   spinner.start('Logging in');
 
