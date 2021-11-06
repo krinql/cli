@@ -19,8 +19,6 @@ yargs(hideBin(process.argv))
       await askKrinqlhandler(argv);
     },
   )
-  // Enable strict mode.
-  .strict()
   // Useful aliases.
   .alias({ h: 'help' })
   // Be nice.
