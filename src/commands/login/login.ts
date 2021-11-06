@@ -76,11 +76,7 @@ export const handler: Handler = async (argv) => {
 
   server.listen(0);
   const { port } = server.address() as AddressInfo;
-  if (IS_DEV)
-    open(
-      `http://localhost:3000/auth/external/cli/login?redirect_port=${port}`,
-    );
-  else open(`${AUTH_BASE_PATH}?redirect_port=${port}`);
+  open(`${AUTH_BASE_PATH}?redirect_port=${port}`);
 
   // Wait for token
   await p;
