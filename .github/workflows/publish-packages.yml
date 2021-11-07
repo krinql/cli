@@ -49,7 +49,7 @@ jobs:
 
       - name: Package
         run: |
-          yarn ci
+          yarn install --frozen-lockfile
           yarn run build
           yarn run package:linux
 
@@ -83,7 +83,7 @@ jobs:
       - name: Build and publish to npm registry
         continue-on-error: true
         run: |
-          yarn ci
+          yarn install --frozen-lockfile
           yarn run build
           yarn publish --access public
         env:
