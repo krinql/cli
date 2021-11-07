@@ -20,9 +20,9 @@ jobs:
 
       - name: Package
         run: |
-          npm ci
-          npm run build
-          npm run package:macos
+          yarn install --frozen-lockfile
+          yarn run build
+          yarn run package:macos
 
       - name: Create tarball
         run: |
@@ -49,9 +49,9 @@ jobs:
 
       - name: Package
         run: |
-          npm ci
-          npm run build
-          npm run package:linux
+          yarn ci
+          yarn run build
+          yarn run package:linux
 
       - name: Create tarball
         run: |
@@ -83,9 +83,9 @@ jobs:
       - name: Build and publish to npm registry
         continue-on-error: true
         run: |
-          npm ci
-          npm run build
-          npm publish --access public
+          yarn ci
+          yarn run build
+          yarn publish --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
@@ -96,7 +96,7 @@ jobs:
 
       - name: Publish to GitHub registry
         continue-on-error: true
-        run: npm publish
+        run: yarn publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
