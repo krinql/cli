@@ -28,6 +28,7 @@
     "build": "tsc",
     "package:linux": "pkg . --targets node14-linux-x64 --output bin/linux/krinql",
     "package:macos": "pkg . --targets node14-macos-x64 --output bin/macos/krinql",
+    "package:win": "pkg . --targets node14-win-x64 --output bin/win/krinql.exe",
     "format": "prettier --loglevel warn --write \"**/*.{ts,js,json,yaml}\"",
     "format:check": "prettier --loglevel warn --check \"**/*.{ts,js,json,yaml}\"",
     "lint": "eslint \"src/**/*.ts\" --fix",
