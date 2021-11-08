@@ -7,6 +7,8 @@ import { Builder, Handler } from './login.types';
 import { updateUserTokens, config } from '../services/config/userData';
 import { AUTH_BASE_PATH, IS_DEV } from '../shared';
 import { ParsedUrlQuery } from 'querystring';
+import chalk from 'chalk';
+import handleError from '../handleError';
 
 export const command = 'login';
 export const desc = 'Login with a new or existing account';
@@ -29,7 +31,7 @@ export const handler: Handler = async (argv) => {
 
   outputs.welcome();
 
-  if(!reauth && config.has('userConfig.Account')) {
+  if (!reauth && config.has('userConfig.Account')) {
     outputs.userConfigFound();
     process.exit(0);
   }
@@ -42,7 +44,6 @@ export const handler: Handler = async (argv) => {
   });
 
   const server = createServer((req: IncomingMessage, res: ServerResponse) => {
-
     if (IS_DEV) {
       res.setHeader('Access-Control-Allow-Origin', '*');
       res.setHeader('Access-Control-Request-Method', '*');
@@ -81,8 +82,21 @@ export const handler: Handler = async (argv) => {
 
   server.listen(0);
   const { port } = server.address() as AddressInfo;
-  open(`${AUTH_BASE_PATH}?redirect_port=${port}`);
+  const openURL = `${AUTH_BASE_PATH}?redirect_port=${port}`;
+  try {
+    process.stdout.write(`
+  Opening webpage in default browser to login
+  Please open the following URL if it doesn't open automatically: 
+  ${chalk.bold(openURL)} 
+  `);
+  open(openURL);
 
+  } catch (e) {
+    handleError(
+      'Unable to open the browser automatically, please open the URL manually.',
+      new Error("Unable to open browser automatically"),
+    );
+  }
   // Wait for token
   await p;
 

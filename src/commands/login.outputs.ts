@@ -41,7 +41,7 @@ export const deviceConfigured = async (_configPath: string): Promise<never> => {
 
 Let's try asking a question!
 
-    ${chalk.bold('$ krinql email regex javascript')}
+    ${chalk.bold('$ krinql how to compile typescript code')}
 
 `);
 
