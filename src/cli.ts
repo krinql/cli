@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 
+import figlet from 'figlet';
 import yargs from 'yargs';
 import { hideBin } from 'yargs/helpers';
 import handleError from './handleError';
@@ -14,8 +15,10 @@ yargs(hideBin(process.argv))
     'The Krinql CLI usage',
     (yargs) => yargs.usage('$0 <question>').example([['$0 how to compile typescript code'], ['$0 how to implement decorators in python'], ['$0 how to softlink file in linux']]),
     async (argv) => {
-      if (!argv._.slice(1).length)
+      if (!argv._.slice(1).length) {
+        process.stdout.write(`${figlet.textSync('Krinql')}\n`);
         return yargs.showHelp();
+      }
       await askKrinqlhandler(argv);
     },
   )
