@@ -1,6 +1,6 @@
 # Krinql CLI
 
-<img alt="Banner" src="./images/banner.png"></a>
+<img alt="Banner" src="./.github/assets/banner.png"></a>
 
 <p align="center">
   <a href="https://www.npmjs.com/package/krinql-cli/">
@@ -69,4 +69,4 @@ For help, use
 ```shell
 $ krinql --help
 ```
-<img alt="krinql_cli_windows" src="./images/mac_output.png">
+<img alt="krinql_cli_windows" src="./.github/assets/mac_output.png">
