@@ -1,25 +1,29 @@
 {
   "name": "krinql-cli",
   "version": "0.0.3",
-  "description": "A simple developer-friendly CLI for using Krinql",
+  "description": "A simple developer friendly CLI for using Krinql",
   "main": "./build/cli.js",
   "license": "GPL-3.0",
   "bin": {
     "krinql": "./build/cli.js",
     "krinql-cli": "./build/cli.js"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/krinql/cli.git"
+  },
   "engines": {
     "node": ">=14.0.0"
   },
   "files": [
-    "/assets",
     "/build"
   ],
   "keywords": [
     "cli",
     "krinql",
     "codex",
-    "AI"
+    "AI",
+    "krinql-cli"
   ],
   "author": "Krinql <support@krinql.com> (krinql.com)",
   "homepage": "https://krinql.com",
