@@ -1,6 +1,6 @@
 # Krinql CLI
 
-<img alt="Banner" src="./.github/assets/banner.png"></a>
+<img alt="Banner" src="https://raw.githubusercontent.com/krinql/cli/main/.github/assets/banner.png"></a>
 
 <p align="center">
   <a href="https://www.npmjs.com/package/krinql-cli/">
