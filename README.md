@@ -69,4 +69,4 @@ For help, use
 ```shell
 $ krinql --help
 ```
-<img alt="krinql_cli_windows" src="./.github/assets/mac_output.png">
+<img alt="krinql_cli_windows" src="https://raw.githubusercontent.com/krinql/cli/main/.github/assets/mac_output.png">
